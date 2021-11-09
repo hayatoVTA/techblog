@@ -1,0 +1,261 @@
+---
+title: 'Cloud Run + DockerでReact Appをデプロイする'
+date: 2021-10-24
+tags: ['GCP', 'React', 'Google Cloud Run', 'Google Container Registry', 'docker', 'nginx']
+draft: false
+summary: 'Cloud Run + DockerでReact Appをデプロイする'
+layout: PostSimple
+---
+
+JPYC 株式会社でエンジニアとして働いています、[@hayato_omr](https://twitter.com/hayato_omr)です。
+会社の業務でも使うことになった Google Cloud Run を少し触ってみたのでざっと内容を書いていこうと思います。
+初心者エンジニアなのでミスってたりここ違うぞって部分があれば教えていただけると幸いです 👀
+
+## Google Cloud Run とは
+
+![](https://storage.googleapis.com/zenn-user-upload/c38fb70fcc45651083bbd587.png)
+
+> Cloud Run は、サーバーレスのコンテナ化されたマイクロサービスをデプロイしてスケールするためのフルマネージド コンピューティング環境です。
+>
+> Cloud Run は、マシンのプロビジョニング、クラスタの構成、自動スケーリングについて心配することなく、サーバーレス HTTP コンテナをデプロイしてスケールするためのフルマネージド コンピューティング環境です。
+>
+> ref : https://cloud.google.com/blog/ja/topics/developers-practitioners/cloud-run-story-serverless-containers
+
+とのことです。
+
+簡単にするとめちゃくちゃ簡単にコンテナをデプロイできて、スケーラブルなサービスですよということだと思います。
+
+詳しいことは[公式の Developer Blog](https://cloud.google.com/blog/ja/topics/developers-practitioners/cloud-run-story-serverless-containers)を読んでください。
+
+## 完成形
+
+デプロイ時のデフォルト URL はこんな感じ
+[https://react-gcr-xxxxxxxxxxx.a.run.app/](https://react-gcr-xxxxxxxxxxx.a.run.app/)
+![](https://storage.googleapis.com/zenn-user-upload/ddd742877a07678bd2d9b983.png)
+
+## 構成
+
+- React
+- Docker
+- Google Container Registry
+- Google Cloud Run
+
+![](https://storage.googleapis.com/zenn-user-upload/62fe0449d7cd4f2fca3d962d.png)
+
+## 本編
+
+### ディレクトリ構成
+
+```
+react-gcr/
+　├  .docker/
+　│　  ├  build/
+　│　  ├  Dockerfile
+　│　  └  nginx.conf
+　├  src/
+　│　  └  ...
+　└  ...
+```
+
+### CRA で React アプリケーションを作成
+
+今回はデフォルトのアプリをデプロイするだけなので JavaScript version で作成してます。
+
+> Note: 自分は npm が好きなので設定してます。
+
+```
+$ npx create-react-app react-gcr --use-npm
+```
+
+### .docker フォルダを作成
+
+プロジェクトの root ディレクトリに移動して、.docker フォルダを作成します。
+
+### nginx の conf ファイルを作成
+
+作っていきます。
+
+```conf:.docker/nginx.conf
+user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    # データ圧縮
+    gzip on;
+    gzip_disable "msie6";
+
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/javascript application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+    brotli on;
+    brotli_types text/plain text/css application/javascript application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+    brotli_static on;
+
+    server {
+        listen 8080;
+
+        root /usr/share/nginx/html;
+        index index.html;
+
+        server_name localhost;
+
+        server_tokens off;
+
+        location ~* \.(?:manifest|appcache|html?|xml|json)$ {
+            expires -1;
+        }
+
+        location ~* \.(?:css|js)$ {
+            try_files $uri =404;
+            expires 1y;
+            access_log off;
+            add_header Cache-Control "public";
+        }
+
+        location ~ ^.+\..+$ {
+            try_files $uri =404;
+        }
+
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+    }
+}
+```
+
+### Dockerfile 作成
+
+```dockerfile:.docker/Dockerfile
+FROM node:12.16.3-alpine as build
+
+WORKDIR /app
+
+COPY . ./
+
+FROM fholzer/nginx-brotli:v1.12.2
+
+WORKDIR /etc/nginx
+ADD nginx.conf /etc/nginx/nginx.conf
+
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+### React App を build
+
+```
+$ npm run build
+```
+
+できたら build フォルダを Dockerfile と同じ階層の`.docker/`ディレクトリに移動させてください。
+
+### docker build
+
+ローカルで nginx+react を立ち上げてブラウザで動作状況を確認する。
+
+Note: `.docker/`ディレクトリに移動してから行ってください。
+
+image を作成
+
+```
+$ docker build -t react-gcr-app ./ --no-cache=true
+```
+
+image をテストする
+
+```
+$ docker run -p 8080:8080 react-gcr-app
+```
+
+ブラウザで[http://localhost:8080](http://localhost:8080)にアクセスして、React のデフォルト画面が出ていたら成功です。
+
+### Google Container Registory に image を push する
+
+前提条件:
+
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstart)のダウンロードが済んでいる
+- Google Cloud Platform の課金が有効になっている
+
+まずは、GCP のコンソールに移動し、新しいプロジェクトを作成します。
+
+![](https://storage.googleapis.com/zenn-user-upload/9727d7f5cc8523fa43ac4a11.png)
+
+作成できたら、terminal に戻って docker の image を再度 build します。
+その時、先ほど作成したプロジェクトのプロジェクト id を使用します。
+react-gcr のところは任意の名前で OK です。
+
+```
+$ docker build -t gcr.io/プロジェクトID/react-gcr ./
+```
+
+次に、認証系です。
+
+> ref: [https://cloud.google.com/container-registry/docs/pushing-and-pulling](https://cloud.google.com/container-registry/docs/pushing-and-pulling)
+
+```
+$ gcloud login
+```
+
+```
+$ gcloud auth configure-docker
+```
+
+あとは Google Container Registory に先ほど作成した image を push します。
+この時のタグは先ほど作成した image のタグと同じものを使用してください。
+
+```
+$ docker push gcr.io/プロジェクトID/react-gcr
+```
+
+ここまで進むとこんな感じ
+![](https://storage.googleapis.com/zenn-user-upload/4c081ece721d0fab5decf8e5.png)
+
+### Google Cloud Run に image を Deploy
+
+[Container Registory](https://console.cloud.google.com/gcr)から、先ほど作成した image を選択し、Cloud Run にデプロイするボタンを押下します。
+
+![](https://storage.googleapis.com/zenn-user-upload/5e4a9457183e76261a4a9ec4.png)
+
+Step1 のサービス設定はそのままで OK。
+Step2 は未認証を許可にチェックを入れておく。
+で、作成します。
+
+作成できたら自動的にサービス詳細ページにリダイレクトするのですが、リージョンの隣の URL に[https://xxxx.a.run.app](https://xxxx.a.run.app)的なものがあるのですが、これにアクセスすると先ほど push したアプリがみられると思います。
+
+## まとめ
+
+Cloud Run を使うとめちゃくちゃ簡単にコンテナイメージにパッケージ化したアプリをデプロイできちゃいます。
+
+あとは Github Actions で自動デプロイも試しているのですが、エラーが出まくっているので成功したらまた記事出します。
+
+参考記事
+https://medium.com/swlh/deploying-a-react-app-to-google-cloud-run-with-github-actions-ae24ac6cb85a
+https://cloud.google.com/container-registry/docs/pushing-and-pulling
+https://cloud.google.com/blog/topics/developers-practitioners/cloud-run-story-serverless-containers

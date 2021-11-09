@@ -6,7 +6,7 @@ const siteMetadata = {
   language: 'ja-JP',
   // siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
   // siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
-  // siteLogo: '/static/images/logo.png',
+  // siteLogo: '/static/images/laptop.png',
   // image: '/static/images/avatar.png',
   // socialBanner: '/static/images/twitter-card.png',
   email: 'omorihayato01@gmail.com',

@@ -1,0 +1,29 @@
+---
+title: 'Reactでフォーカスを当てる・離すと自動伸縮するフォームを作った'
+date: 2021-09-25
+tags: ['React']
+draft: false
+summary: 'Reactでフォーカスを当てる・離すと自動伸縮するフォームを作った'
+layout: PostSimple
+---
+
+## 背景
+
+LINE の Input フォームのように、フォーカスを当てるとニョキッと伸びるフォームを React で実装してみたかったので色々調べた。
+
+## 調べた結果
+
+- `onFocus`と`onBlur`を使えばいけそう
+- `onFocus`でフォーカスが当たった時に state を`true`にして`onBlur`で離した時に state を`false`にすれば良い
+
+## 実装
+
+<div style={{ width: '100%' }}>
+  <iframe
+    src="https://codesandbox.io/embed/react-expansion-form-x9193?fontsize=14&hidenavigation=1&theme=dark"
+    style={{ width: '100%', height: '500px', border: '0', borderRadius: '4px', overflow: 'hidden' }}
+    title="react-expansion-form"
+    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+  ></iframe>
+</div>
