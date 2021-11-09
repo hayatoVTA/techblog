@@ -3,7 +3,7 @@ const siteMetadata = {
   author: 'Hayato Omori',
   headerTitle: "Hayato Omori's Tech Blog",
   description: '色々なところにあげていた記事を徐々に移行していこうかなと思ってます',
-  language: 'en-us',
+  language: 'ja-JP',
   // siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
   // siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
   // siteLogo: '/static/images/logo.png',
@@ -15,7 +15,7 @@ const siteMetadata = {
   facebook: 'https://www.facebook.com/profile.php?id=100027709065045',
   // youtube: 'https://youtube.com',
   linkedin: 'https://www.linkedin.com/in/hayato-omori-7796711b8/',
-  locale: 'en-US',
+  locale: 'ja-JP',
   analytics: {
     // supports plausible, simpleAnalytics or googleAnalytics
     plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
