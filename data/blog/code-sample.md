@@ -2,7 +2,7 @@
 title: Sample .md file
 date: '2016-03-08'
 tags: ['markdown', 'code', 'features']
-draft: false
+draft: true
 summary: Example of a markdown file with code blocks and syntax highlighting
 ---
 
@@ -35,4 +35,23 @@ def fib():
 
 for index, fibonacci_number in zip(range(10), fib()):
      print('{i:3}: {f:3}'.format(i=index, f=fibonacci_number))
+```
+
+## Picture
+
+```html
+<div className="flex flex-wrap -mx-2 overflow-hidden xl:-mx-2">
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Maple](/static/images/canada/maple.jpg)
+  </div>
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Lake](/static/images/canada/lake.jpg)
+  </div>
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Mountains](/static/images/canada/mountains.jpg)
+  </div>
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Toronto](/static/images/canada/toronto.jpg)
+  </div>
+</div>
 ```

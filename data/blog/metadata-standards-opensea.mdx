@@ -1,0 +1,95 @@
+---
+title: 'Metadata Standards for OpenSea(日本語)'
+date: 2021-11-07
+lastmod: '2021-11-07'
+tags: ['nft', 'metadata', 'ERC721', 'ERC1155', 'solidity', 'web3', 'blockchain']
+draft: false
+summary: 'Metadata Standards for OpenSea(日本語)'
+layout: PostSimple
+---
+
+ERC721 と ERC1155 規格の NFT におけるメタデータのデファクトスタンダードを OpenSea の公式ドキュメントを読みながら最低限のところだけ書いていきます。（随時更新）
+
+https://docs.opensea.io/docs/metadata-standards
+
+## Metadata の埋め込み URI
+
+ERC721 規格では tokenURI メソッド、ERC1155 規格では uri メソッドで URI が帰ってきます。
+
+```solidity
+/**
+  * @dev Returns an URI for a given token ID
+  */
+  function tokenURI(uint256 _tokenId) public view returns (string) {
+    return Strings.strConcat(
+      baseTokenURI(),
+      Strings.uint2str(_tokenId)
+    );
+  }
+```
+
+たとえば、以下の画像のような内容だとこのようなメタデータを利用します。
+
+https://opensea-creatures-api.herokuapp.com/api/creature/3
+
+![](https://storage.googleapis.com/zenn-user-upload/53b08c86b92e09d0c6022e0a.png)
+
+```json
+{
+  "attributes": [
+    {
+      "trait_type": "base",
+      "value": "narwhal"
+    },
+    {
+      "trait_type": "eyes",
+      "value": "sleepy"
+    },
+    {
+      "trait_type": "mouth",
+      "value": "cute"
+    },
+    {
+      "trait_type": "level",
+      "value": 4
+    },
+    {
+      "trait_type": "stamina",
+      "value": 90.2
+    },
+    {
+      "trait_type": "personality",
+      "value": "boring"
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "aqua_power",
+      "value": 10
+    },
+    {
+      "display_type": "boost_percentage",
+      "trait_type": "stamina_increase",
+      "value": 5
+    },
+    {
+      "display_type": "number",
+      "trait_type": "generation",
+      "value": 1
+    }
+  ],
+  "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.",
+  "external_url": "https://example.com/?token_id=3",
+  "image": "https://storage.googleapis.com/opensea-prod.appspot.com/creature/3.png",
+  "name": "Dave Starbelly"
+}
+```
+
+## Metadata の構成
+
+Opensea は、[ERC721 の公式のメタデータスタンダード](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md)、または[Enjin Metadata suggestions](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1155.md#erc-1155-metadata-uri-json-schema)をサポートしています。
+
+そして、複数のアタッチメントに対応しており、音声ファイル、動画ファイル、3D メディアを含むことができます。
+
+### プロパティ毎の特性 (後ほど翻訳)
+
+![](https://storage.googleapis.com/zenn-user-upload/4e531826f108beb291aaccfd.png)

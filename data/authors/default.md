@@ -1,16 +1,28 @@
 ---
-name: Tails Azimuth
+name: Hayato Omori
 avatar: /static/images/avatar.png
-occupation: Professor of Atmospheric Science
-company: Stanford University
+occupation: Software & Blockchain Engineer
+company: JPYC Inc.
 email: address@yoursite.com
-twitter: https://twitter.com/Twitter
-linkedin: https://www.linkedin.com
-github: https://github.com
+twitter: https://twitter.com/hayato_omr
+linkedin: https://www.linkedin.com/in/hayato-omori-7796711b8/
+github: https://github.com/hayatoVTA
 ---
 
-Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.
+I'm 17years old. high school student.
 
-He leads the clean energy group which develops 3D air pollution-climate models, writes differential equation solvers, and manufactures titanium plated air ballons. In his free time he bakes raspberry pi.
+Software and Blockchain Engineer in JPYC Inc.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+Favorite programming lang and tools are Python, TypeScript, React, Next, Django and FastAPI.
+
+Also recently work in myself, from frontend to backend, network and Infrastructure. but I like serverless development with firebase or gcp best!
+
+Hobby: Computer Programming・Japanese idol・Manga・Anime・Cycling・Watching Europe Soccer
+
+---
+
+17 歳の高校二年生です。受験生です。
+
+エンジニアとしては主にフロントエンドとブロックチェーンを触っていて、言語は Python, TypeScript, JavaScript FW は React.js, Next.js, Django, FastAPI が好きです。
+
+趣味: プログラミング・アイドル・漫画・アニメ・サイクリング・サッカー鑑賞

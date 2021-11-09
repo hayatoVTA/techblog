@@ -1,0 +1,52 @@
+---
+title: 'Conoha VPSにSSH接続する方法 in MacOS'
+date: 2021-7-24
+lastmod: '2021-11-10'
+tags: ['vps', 'ssh']
+draft: false
+summary: 'MacOS CatalinaでConoha VPSに接続する方法をまとめる'
+layout: PostSimple
+---
+
+## 概要
+
+**通常の ssh 接続方法**
+
+```zsh
+$ ssh ユーザー名@ホスト名 -i 秘密鍵ファイルのパス -p ポート番号
+```
+
+これを
+
+```zsh
+$ ssh 指定の名前
+```
+
+でログインできるようにしたい。
+
+## 手順
+
+1. ~/.ssh ディレクトリの作成
+2. 秘密鍵ファイルを移動
+3. ~/.ssh/config ファイルを作成
+4. サーバーに接続できるか確認
+
+### ディレクトリごとのアクセス権限
+
+`.ssh/ ・・・ chmod 700`
+
+`.ssh/秘密鍵ファイル名 ・・・ chmod 400`
+
+`.ssh/config ・・・ chmod 600`
+
+### ~/.ssh/config ファイルの作成
+
+```config
+Host 接続名(自由)
+    HostName ホスト名（ipアドレス）
+    User ユーザー名（最初は root かな）
+    IdentityFile ~/.ssh/秘密鍵のファイル名
+    Port ポート番号
+    TCPKeepAlive yes
+    IdentitiesOnly yes
+```
