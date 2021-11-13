@@ -1,0 +1,113 @@
+---
+title: 'How to Set up M1 Pro Macbook Pro'
+date: '2021-11-13'
+lastmod: '2021-11-13'
+tags: ['Macbook', 'M1 Pro', 'Apple Silicon']
+draft: false
+summary: 'How to Set up M1 Pro Macbook Pro'
+layout: PostSimple
+---
+
+![m1pro](/static/images/m1pro.png)
+
+## How to Install homebrew
+
+1. Install homebrew on your terminal
+
+```zsh
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Set the path
+
+```zsh
+$ echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/<yourname>/.zprofile
+```
+
+3. Check brew state
+
+```zsh
+$ brew doctor
+```
+
+## How to Install Node with nodebrew
+
+1. Install nodebrew from homebrew
+
+```zsh
+$ brew install nodebrew
+```
+
+2. Setup nodebrew
+
+```zsh
+$ nodebrew setup
+```
+
+3. Set the path
+
+```zsh
+$ echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> ~/.zshrc
+$ source ~/.zshrc
+```
+
+4. Check available versions for install
+
+```zsh
+$ nodebrew ls-remote
+```
+
+5. Install node
+
+```zsh
+$ nodebrew install-binary v16.13.0
+```
+
+6. Activation installed version
+
+```zsh
+$ nodebrew use v16.13.0
+```
+
+7. Check activated version
+
+```zsh
+$ node -v
+v16.13.0
+```
+
+## How to Install yarn
+
+It's so easy....
+
+```zsh
+$ brew install yarn
+```
+
+## How to Install Git
+
+1. Install git from homebrew
+
+```zsh
+$ brew install git
+```
+
+2. Setup the path
+
+```zsh
+$ echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc
+$ source ~/.zshrc
+```
+
+3. Check git version
+
+```zsh
+$ git --version
+git version 2.30.1 (Apple Git-130)
+```
+
+**It was Done...!**
+
+Thank you for reading!!!
+Please follow my twitter account!!!
+https://twitter.com/hayato_omr
