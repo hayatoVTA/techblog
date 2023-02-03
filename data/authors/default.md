@@ -1,7 +1,7 @@
 ---
 name: Hayato Omori
 avatar: /static/images/avatar.png
-occupation: CEO
+# occupation: CEO
 company: JPchain Inc.
 email: h.omori@jpchain.jp
 twitter: https://twitter.com/hayato_omr

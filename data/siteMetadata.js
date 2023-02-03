@@ -2,7 +2,7 @@ const siteMetadata = {
   title: 'Hayato Omori Blog',
   author: 'Hayato Omori',
   headerTitle: "Hayato Omori's Blog",
-  description: '色々なところにあげていた記事を徐々に移行していこうかなと思ってます',
+  // description: '色々なところにあげていた記事を徐々に移行していこうかなと思ってます',
   language: 'ja-JP',
   // siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
   // siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',

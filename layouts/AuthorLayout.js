@@ -33,7 +33,41 @@ export default function AuthorLayout({ children, frontMatter }) {
               <SocialIcon kind="twitter" href={twitter} />
             </div>
           </div>
-          <div className="pt-8 pb-8 prose dark:prose-dark max-w-none xl:col-span-2">{children}</div>
+          <div className="pt-8 pb-8 prose dark:prose-dark max-w-none xl:col-span-2">
+            <div>{children}</div>
+            <div className="pt-3 pb-3">
+              <h2>Experience</h2>
+              {/* <div>
+                <h3>Keio University</h3>
+                <p>Faculty of Policy Management</p>
+              </div> */}
+              <div className="px-4 pb-7 mb-5 border border-gray-300 rounded-md hover:shadow-lg transition duration-300">
+                <h3>JPchain Inc.</h3>
+                <div>CEO</div>
+                <div>Apr 2022 - Present</div>
+              </div>
+              <div className="px-4 pb-7 mb-5 border border-gray-300 rounded-md hover:shadow-lg transition duration-300">
+                <h3>JPYC Inc.</h3>
+                <div>Software Engineer, CS</div>
+                <div>shorttime regular employee</div>
+                <div>Feb 2021 - Dec 2022</div>
+                <div>TypeScript, React, Next, Node, Solidity, GCP, AWS</div>
+              </div>
+              <div className="px-4 pb-7 mb-5 border border-gray-300 rounded-md hover:shadow-lg transition duration-300">
+                <h3>Hopscotch Co., Ltd.</h3>
+                <div>Software Engineer</div>
+                <div>Aug 2021 - Mar 2022</div>
+                <div>TypeScript, React, Firebase, GCP</div>
+              </div>
+              <div className="px-4 pb-7 mb-5 border border-gray-300 rounded-md hover:shadow-lg transition duration-300">
+                <h3>CARCH, Inc.</h3>
+                <div>Application Engineer</div>
+                <div>Internship</div>
+                <div>Nov 2020 - Mar 2021</div>
+                <div>Dart, Flutter, Firebase</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
