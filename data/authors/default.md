@@ -9,10 +9,9 @@ linkedin: https://www.linkedin.com/in/hayato-omori-7796711b8/
 github: https://github.com/hayatoVTA
 ---
 
-Hayato Omori is N high school student.
+しがない経営者兼エンジニアです。
 
-Favorite programming lang and tools are TypeScript, React, Nextjs.
-
-Also recently work in myself, from frontend to backend. but I like serverless development with firebase or gcp best.
-
-Hobby: Little Glee Monster・Manga・Anime・Soccer・Mahjong
+- 慶應義塾大学
+- JPchain 株式会社 - CEO
+- 合同会社 MONONO - COO
+- メタエクシード株式会社 - CTO
