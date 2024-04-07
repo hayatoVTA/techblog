@@ -9,9 +9,7 @@ linkedin: https://www.linkedin.com/in/hayato-omori-7796711b8/
 github: https://github.com/hayatoVTA
 ---
 
-しがない経営者兼エンジニアです。
-
-- 慶應義塾大学
+- 慶應義塾大学 SFC
 - JPchain 株式会社 - CEO
 - 合同会社 MONONO - COO
 - メタエクシード株式会社 - CTO

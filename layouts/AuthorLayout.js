@@ -42,6 +42,16 @@ export default function AuthorLayout({ children, frontMatter }) {
                 <p>Faculty of Policy Management</p>
               </div> */}
               <div className="px-4 pb-7 mb-5 border border-gray-300 rounded-md hover:shadow-lg transition duration-300">
+                <h3>Kaizen Platform, Inc.</h3>
+                <div>Intern</div>
+                <div>Apr 2024 - Present</div>
+              </div>
+              <div className="px-4 pb-7 mb-5 border border-gray-300 rounded-md hover:shadow-lg transition duration-300">
+                <h3>MONONO Inc.</h3>
+                <div>COO</div>
+                <div>Sep 2023 - Present</div>
+              </div>
+              <div className="px-4 pb-7 mb-5 border border-gray-300 rounded-md hover:shadow-lg transition duration-300">
                 <h3>JPchain Inc.</h3>
                 <div>CEO</div>
                 <div>Apr 2022 - Present</div>
